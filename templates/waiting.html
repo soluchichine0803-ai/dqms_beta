@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="../static/styles.css">
+    <title>Waiting in Queue</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Corrected templating syntax using chatGPT debug
+            const memberId = {{ member_id | tojson
+        }};
+
+        const queueList = document.getElementById("queue-list");
+        const positionEl = document.getElementById("position");
+        const modal = document.getElementById("status-modal");
+        const message = document.getElementById("status-message");
+        const closeBtn = document.getElementById("close-modal");
+
+        closeBtn.addEventListener("click", () => {
+            modal.style.display = "none";
+        });
+
+        setInterval(() => {
+            fetch("/queue-status/" + memberId)
+                .then(res => res.json())
+                .then(data => {
+                    if (!data.queue || data.queue.length === 0) {
+                        message.textContent = "You have been attended to or removed from the queue.";
+                        modal.style.display = "flex";
+
+                        queueList.innerHTML = "";
+                        positionEl.textContent = "";
+                        return;
+                    }
+
+                    queueList.innerHTML = "";
+                    data.queue.forEach((member) => {
+                        const li = document.createElement("li");
+                        li.textContent = member.name + (member.id === memberId ? " (You)" : "");
+                        if (member.id === memberId) li.classList.add("current-user");
+                        queueList.appendChild(li);
+                    });
+
+                    const myIndex = data.queue.findIndex(m => m.id === memberId);
+                    positionEl.textContent = myIndex >= 0 ? `Position: ${myIndex + 1}` : "";
+                })
+                .catch(err => {
+                    console.error("Error fetching queue status:", err);
+                });
+        }, 3000);
+        });
+    </script>
+</head>
+
+<body>
+    <div class="waiting-container">
+        <h2>Hello {{ name }}, you are in the queue!</h2>
+        <p>Queue: <strong>{{ queue_name }}</strong> (Code: {{ queue_code }})</p>
+        <p>Your current position: <strong id="position">{{ position }}</strong></p>
+
+        <h3>Current Queue:</h3>
+        <ul id="queue-list">
+            {% for member in queue %}
+            <li>{{ loop.index }}. {{ member.name }} ({{ member.priority_status }})</li>
+            {% endfor %}
+        </ul>
+
+        <form action="/leave-queue" method="POST">
+            <input type="hidden" name="member_id" value="{{ member_id }}">
+            <button type="submit">Leave Queue</button>
+        </form>
+    </div>
+    <div id="status-modal" class="modal">
+        <div class="modal-content">
+            <p id="status-message"></p>
+            <button id="close-modal">OK</button>
+
+            <script>
+                document.getElementById("close-modal").addEventListener("click", () => {
+                    const home = `${window.location.protocol}//${window.location.hostname}:${window.location.port}/`;
+                    window.location.href = home;
+                });
+            </script>
+        </div>
+    </div>
+</body>
+
+</html>

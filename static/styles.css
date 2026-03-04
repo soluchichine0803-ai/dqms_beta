@@ -1,0 +1,270 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.body {
+    background-color: white;
+    width: 350px;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.body h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #1e3c72;
+}
+
+label {
+    font-weight: bold;
+    font-size: 14px;
+    color: #333;
+}
+
+
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    transition: 0.3s ease;
+    font-size: 14px;
+}
+
+input:focus,
+textarea:focus {
+    border-color: #2a5298;
+    outline: none;
+    box-shadow: 0 0 5px rgba(42, 82, 152, 0.4);
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #2a5298;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+button:hover {
+    background-color: #1e3c72;
+    transform: scale(1.02);
+}
+
+
+.waiting-container {
+    background-color: white;
+    width: 500px;
+    max-height: 85vh;
+    overflow-y: auto;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.waiting-container h2 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #1e3c72;
+}
+
+.waiting-container h3 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: #2a5298;
+}
+
+.waiting-container p {
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #333;
+}
+
+#position {
+    font-size: 18px;
+    color: #2a5298;
+    font-weight: bold;
+}
+
+#queue-list {
+    list-style: none;
+    padding: 0;
+}
+
+#queue-list li {
+    padding: 8px 12px;
+    margin-bottom: 6px;
+    background-color: #f0f4ff;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+
+.current-user {
+    background-color: #dbe4ff;
+    font-weight: bold;
+    transform: scale(1.02);
+    transition: 0.2s ease;
+}
+
+.waiting-container button {
+    background-color: #e63946;
+}
+
+.waiting-container button:hover {
+    background-color: #c9182b;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 25px;
+    border-radius: 10px;
+    width: 300px;
+    text-align: center;
+}
+
+.modal-content p {
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: #1e3c72;
+    font-weight: bold;
+}
+
+#close-modal {
+    padding: 10px 20px;
+    background-color: #2a5298;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+#close-modal:hover {
+    background-color: #1e3c72;
+    transform: scale(1.05);
+}
+
+.adminwrap {
+    background-color: white;
+    width: 950px;
+    max-width: 95%;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+    margin: 40px auto;
+}
+
+.adminwrap h1 {
+    text-align: center;
+    color: #1e3c72;
+    margin-bottom: 5px;
+}
+
+.queue-code {
+    text-align: center;
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 30px;
+}
+
+.adminwrap table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.adminwrap th {
+    background-color: #2a5298;
+    color: white;
+    padding: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.adminwrap td {
+    padding: 12px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.adminwrap tr:nth-child(even) {
+    background-color: #f4f7ff;
+}
+
+.adminwrap tr:hover {
+    background-color: #dbe4ff;
+    transition: 0.2s ease;
+}
+
+/* Buttons */
+.adminwrap form {
+    display: inline;
+}
+
+.adminwrap button {
+    padding: 6px 10px;
+    border: none;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 2px;
+    transition: 0.2s ease;
+}
+
+.adminwrap button:nth-of-type(1) {
+    background-color: #22c55e;
+    color: white;
+}
+
+.adminwrap button:nth-of-type(2) {
+    background-color: #e63946;
+    color: white;
+}
+
+.adminwrap button:nth-of-type(3) {
+    background-color: #2a5298;
+    color: white;
+}
+
+.adminwrap button:nth-of-type(4) {
+    background-color: #c9182b;
+    color: white;
+}
+
+.adminwrap button:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+}

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>{{ queue_name }}</title>
+</head>
+
+<body>
+    <div class="adminwrap">
+        <h1>{{ queue_name }}</h1>
+        <p>
+            Code: {{ queue_code }}
+        </p>
+        <table>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Priority Request</th>
+                <th>Priority Status</th>
+                <th>Actions</th>
+            </tr>
+            {% for member in members %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ member.name }}</td>
+                <td>{{ member.priority_request }}</td>
+                <td>{{ member.priority_status }}</td>
+                <td>
+                    {% if member.priority_status == 'pending' %}
+                    <form method="POST"
+                        action="{{ url_for('admin_priority', queue_code=queue_code, member_id=member.id, action='approve') }}">
+                        <button type="submit">Approve</button>
+                    </form>
+                    <form method="POST"
+                        action="{{ url_for('admin_priority', queue_code=queue_code, member_id=member.id, action='reject') }}">
+                        <button type="submit">Reject</button>
+                    </form>
+                    {% endif %}
+                    <form method="POST"
+                        action="{{ url_for('admin_advance', queue_code=queue_code, member_id=member.id) }}">
+                        <button type="submit">Serve</button>
+                    </form>
+                    <form method="POST"
+                        action="{{ url_for('admin_remove', queue_code=queue_code, member_id=member.id) }}">
+                        <button type="submit">Remove</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+
+</body>
+
+</html>

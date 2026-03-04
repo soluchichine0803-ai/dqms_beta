@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="../static/styles.css">
+    <title>Join Queue</title>
+</head>
+
+<body>
+
+    <div class="body"> 
+        {% if error %}
+        <script>
+            alert("{{ error }}");
+        </script>
+        {% endif %}
+        <form action="/join" method="POST">
+            <h2>Join Queue</h2>
+            <label>Name:</label><br>
+            <input type="text" name="name" required><br><br>
+
+            <label>Queue Code:</label><br>
+            <input type="text" name="queue_code" required><br><br>
+
+            <label>Priority Reason (Optional):</label><br>
+            <textarea name="priority_request" maxlength="100"></textarea><br><br>
+
+            <button type="submit">Join Queue</button>
+        </form>
+    </div>
+
+
+</body>
+
+</html>

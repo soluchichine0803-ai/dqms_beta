@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="../static/styles.css">
+    <title>Administrator</title>
+</head>
+
+<body>
+    <div class="adminwrap">
+        <h1>Admin Dashboard</h1>
+        <ul>
+            {% for queue in queues %}
+            <li>
+                <a href="{{ url_for('admin_queue', queue_code=queue.queue_code) }}">
+                    {{ queue.queue_name }} ({{ queue.queue_code }})
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+
+
+</html>
